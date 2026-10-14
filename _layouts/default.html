@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | escape }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% seo %}
+  <meta name="robots" content="{% if page.noindex %}noindex,follow{% else %}index,follow{% endif %}">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  {% if page.math %}
+  <script src="{{ '/assets/js/mathjax-config.js' | relative_url }}"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+  {% endif %}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到正文</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-name" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <nav aria-label="主导航">
+        <a href="{{ '/' | relative_url }}">笔记目录</a>
+        <a href="{{ '/math/group-ring-field-quotient-ideal/' | relative_url }}">数学基础</a>
+        <a href="{{ '/lattice/gaussian-smoothing-parameter/' | relative_url }}">格密码学</a>
+        <a href="https://github.com/AbnerSolo/AbnerSolo.github.io">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="page">
+    {{ content }}
+  </main>
+  <footer class="site-footer">
+    <p>AbnerSolo · 网络空间安全学习与研究笔记</p>
+    <p><a href="{{ '/' | relative_url }}">笔记目录</a> · <a href="https://github.com/AbnerSolo/AbnerSolo.github.io/issues">更正与讨论</a></p>
+  </footer>
+</body>
+</html>

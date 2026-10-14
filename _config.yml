@@ -1,0 +1,56 @@
+title: "AbnerSolo 学术笔记"
+tagline: "网络空间安全数学基础与格密码学"
+description: "AbnerSolo 的网络空间安全学习与研究笔记：群、环、域、商结构、理想、格密码学、Gaussian 测度与平滑参数。"
+url: "https://abnersolo.github.io"
+baseurl: ""
+repository: "AbnerSolo/AbnerSolo.github.io"
+lang: zh-CN
+locale: zh_CN
+timezone: Asia/Shanghai
+author:
+  name: AbnerSolo
+  url: https://github.com/AbnerSolo
+social:
+  name: AbnerSolo
+  links:
+    - https://github.com/AbnerSolo
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-relative-links
+  - jekyll-redirect-from
+relative_links:
+  enabled: true
+  collections: false
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      lang: zh-CN
+      author: AbnerSolo
+  - scope:
+      path: notes
+    values:
+      layout: note
+      math: true
+      seo:
+        type: Article
+exclude:
+  - README.md
+  - PUBLISHING.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - .jekyll-cache
+  - .gitignore
+  - scripts
+# Google Search Console 的验证码可填入此处；未验证前不输出验证标签。
+# google_site_verification: "账户提供的真实验证码"

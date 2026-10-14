@@ -1,3 +1,9 @@
+# AbnerSolo 学术笔记
+
+[网站首页](https://abnersolo.github.io/) · [数学基础](https://abnersolo.github.io/math/group-ring-field-quotient-ideal/) · [Gaussian 笔记](https://abnersolo.github.io/lattice/gaussian-smoothing-parameter/)
+
+> 网站源码已配置完成；公开网站需要在仓库 Settings → Pages 中启用。具体步骤见 [发布与收录说明](PUBLISHING.md)。
+
 ## About Me
 
 本科就读于数学专业，现跨专业进入网络空间安全方向攻读博士学位。本仓库将持续记录并分享我在直博阶段的学习与研究内容。
@@ -40,3 +46,15 @@ As I am still learning, the notes may contain omissions or misunderstandings. Co
 笔记会区分原论文结论、个人推导与直观解释。更正与讨论欢迎通过本仓库交流。
 
 *The notes distinguish results from the paper, independent derivations, and intuition. Corrections and discussion are welcome.*
+
+---
+
+## 网站发布与维护
+
+本站使用 GitHub Pages / Jekyll。原始笔记保存在 `notes/`，每篇笔记通过 Front Matter 设置标题、摘要和固定链接。网站首页使用 `index.md`；`jekyll-seo-tag` 生成网页标题、摘要、canonical 和结构化数据，`jekyll-sitemap` 自动生成 [sitemap.xml](https://abnersolo.github.io/sitemap.xml)。
+
+- [网络空间安全数学基础——群，环，域，商群与理想（网页）](https://abnersolo.github.io/math/group-ring-field-quotient-ideal/)
+- [GAUSSIAN 阅读笔记（网页）](https://abnersolo.github.io/lattice/gaussian-smoothing-parameter/)
+- [发布、账户操作与 Google 收录说明](PUBLISHING.md)
+
+添加笔记时请设置唯一的 `permalink`，并在 `index.md` 和本目录增加入口。正文和公式内容应保留；Kramdown 的行内公式使用双美元符号包裹，独立公式块继续使用原有双美元符号。

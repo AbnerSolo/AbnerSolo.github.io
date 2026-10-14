@@ -1,0 +1,30 @@
+name: Check GitHub Pages site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with the GitHub Pages Jekyll engine
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Check URLs and search metadata
+        run: python3 scripts/check_site.py
+      - name: Save generated site
+        uses: actions/upload-artifact@v4
+        with:
+          name: academic-notes-site
+          path: _site/
+          retention-days: 7
