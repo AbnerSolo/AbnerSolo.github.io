@@ -65,7 +65,7 @@
 - `404.html`：返回目录入口；设置 noindex 并排除出 sitemap。
 - `README.md` 与本说明：仓库维护资料，排除出公开站点与 sitemap。
 
-正文中的行内公式仅将美元符号分隔形式调整为 Kramdown 的双美元符号；TeX 内容、数学叙述与参考文献保留。MathJax 负责浏览器内排版，文章正文并不依赖 JavaScript 才能出现。
+正文只做导航链接与公式排版兼容调整，包括行内公式的双美元分隔符、公式块周围的空行，以及含绝对值竖线的段落标记；TeX 内容、数学叙述与参考文献保留。MathJax 负责浏览器内排版，文章正文并不依赖 JavaScript 才能出现。
 
 仓库还提供自动构建检查：`.github/workflows/check-pages.yml` 使用 GitHub 官方的 Jekyll 构建环境，检查生成网址、导航、SEO 元数据、公式节点与 sitemap，并保留生成网站的预览压缩包。此检查不依赖 Pages 已启用。
 
