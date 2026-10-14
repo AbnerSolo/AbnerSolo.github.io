@@ -3,6 +3,8 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 import json
+import html
+import re
 import xml.etree.ElementTree as ET
 
 ROOT = Path("_site")
@@ -16,7 +18,11 @@ class Page(HTMLParser):
         self.ids, self.links, self.canonical = set(), [], []
         self.meta, self.math_count, self.h1_count = {}, 0, 0
         self.in_json, self.json_text, self.structured = False, "", []
-        self.feed(path.read_text(encoding="utf-8"))
+        self.raw = path.read_text(encoding="utf-8")
+        self.feed(self.raw)
+        self.math = [(bool(display), display or inline) for inline, display in
+                     re.findall(r"\\\((.*?)\\\)|\\\[(.*?)\\\]", html.unescape(self.raw), re.S)]
+        self.math_count += len(self.math)
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -45,13 +51,36 @@ class Page(HTMLParser):
             self.in_json = False
 
 
+def source_math(path):
+    items, block = [], None
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if re.fullmatch(r"\s*\$\$\s*", line):
+            if block is None:
+                block = []
+            else:
+                items.append((True, "\n".join(block)))
+                block = None
+        elif block is not None:
+            block.append(line)
+        else:
+            items.extend((False, tex) for tex in re.findall(r"\$\$(.*?)\$\$", line))
+    assert block is None
+    return items
+
+
 for url in URLS:
     page = Page(ROOT / url.strip("/") / "index.html")
     assert page.canonical == [BASE + url], (url, page.canonical)
     assert page.meta.get("description") and page.meta.get("robots") == "index,follow", url
     assert page.h1_count == 1 and page.structured, url
     if url != "/":
-        assert page.math_count > 100, (url, page.math_count)
+        source = (Path("notes/algebra/group-ring-field-quotient-ideal.md") if url.startswith("/math/")
+                  else Path("notes/lattice/gaussian-smoothing-parameter.md"))
+        expected = source_math(source)
+        assert len(page.math) == len(expected), (url, len(page.math), len(expected))
+        normalize = lambda tex: re.sub(r"\s+", "", tex)
+        for n, (actual, original) in enumerate(zip(page.math, expected)):
+            assert actual[0] == original[0] and normalize(actual[1]) == normalize(original[1]), (url, n, actual, original)
         assert any(item.get("@type") == "Article" for item in page.structured), url
     for href in page.links:
         target = urlsplit(href)

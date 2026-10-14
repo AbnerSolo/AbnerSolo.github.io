@@ -23,6 +23,7 @@ jobs:
       - name: Check URLs and search metadata
         run: python3 scripts/check_site.py
       - name: Save generated site
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: academic-notes-site

@@ -1,4 +1,4 @@
-// kramdown 输出 math/tex script；在 MathJax 3 中保留这些公式的原始 TeX。
+// 处理 Kramdown 的公式分隔符，并兼容旧版 math/tex script。
 window.MathJax = {
   tex: {
     inlineMath: [['\\(', '\\)']],
@@ -7,7 +7,7 @@ window.MathJax = {
   },
   options: {
     renderActions: {
-      find: [10, function (doc) {
+      findScript: [10, function (doc) {
         document.querySelectorAll('script[type^="math/tex"]').forEach(function (node) {
           const display = /;\s*mode=display/.test(node.type);
           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
